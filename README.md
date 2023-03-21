@@ -1,4 +1,4 @@
-Problem happens on linux only. macOS seems unaffected.
+Problem happens on linux only. macOS seems unaffected. windows works as well (some dlls need to be in the path).
 
 I installed `nixpkgs.opencascade-occt` with `nix-env`. Adjust path in `build.rs` and `.vscode/settings.json` if using VSCode.
 
