@@ -45,9 +45,10 @@ namespace MyTest
         }
 
         StlAPI_Writer writer;
-        writer.Write(comp, stl_file_path.c_str());
+        bool writeStatus;
+        writeStatus = writer.Write(comp, stl_file_path.c_str());
 
-        return true;
+        return writeStatus;
     }
 
 }; // namespace MyTest
