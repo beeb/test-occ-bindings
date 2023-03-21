@@ -1,3 +1,5 @@
+Problem happens on linux only. macOS seems unaffected.
+
 I installed `nixpkgs.opencascade-occt` with `nix-env`. Adjust path in `build.rs` and `.vscode/settings.json` if using VSCode.
 
 When doing `cargo run`, there are lots of errors related to `undefined reference`s and also
