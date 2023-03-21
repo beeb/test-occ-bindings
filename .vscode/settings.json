@@ -1,5 +1,9 @@
 {
-  "C_Cpp.default.includePath": ["~/.nix-profile/include/opencascade", "${workspaceFolder}/target/cxxbridge"],
+  "C_Cpp.default.includePath": [
+    "~/.nix-profile/include/opencascade",
+    "${workspaceFolder}/target/cxxbridge",
+    "C:\\OpenCASCADE-7.7.0-vc14-64\\opencascade-7.7.0\\inc"
+  ],
   "files.associations": {
     "*.lxx": "cpp"
   }
