@@ -2,10 +2,6 @@
 #ifndef occtwrapper_OCCTWrapper_hpp_
 #define occtwrapper_OCCTWrapper_hpp_
 
-#include <array>
-#include <string>
-#include <vector>
-
 #include "rust/cxx.h"
 
 namespace MyTest
