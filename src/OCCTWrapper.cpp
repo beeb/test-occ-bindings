@@ -2,10 +2,11 @@
 
 #include "STEPControl_Reader.hxx"
 #include "BRep_Builder.hxx"
+#include "BRepMesh_IncrementalMesh.hxx"
 #include "StlAPI_Writer.hxx"
 
-/* const double STEP_TRANS_CHORD_ERROR = 0.005;
-const double STEP_TRANS_ANGLE_RES = 1; */
+const double STEP_TRANS_CHORD_ERROR = 0.005;
+const double STEP_TRANS_ANGLE_RES = 1;
 
 namespace MyTest
 {
@@ -39,6 +40,7 @@ namespace MyTest
                 for (int i = 1; i <= nbs; i++)
                 {
                     TopoDS_Shape shape = reader.Shape(i);
+                    BRepMesh_IncrementalMesh mesher(shape, STEP_TRANS_CHORD_ERROR, false, STEP_TRANS_ANGLE_RES, true);
                     builder.Add(comp, shape);
                 }
             }
@@ -46,7 +48,8 @@ namespace MyTest
 
         StlAPI_Writer writer;
         bool writeStatus;
-        writeStatus = writer.Write(comp, stl_file_path.c_str());
+        Message_ProgressRange progress = Message_ProgressRange();
+        writeStatus = writer.Write(comp, stl_file_path.c_str(), progress);
 
         return writeStatus;
     }

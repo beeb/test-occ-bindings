@@ -1,5 +1,10 @@
 fn main() {
-    println!("cargo:rustc-link-search=/home/valentin/.nix-profile/lib");
+    let home_dir = home::home_dir().unwrap();
+
+    println!(
+        "cargo:rustc-link-search={}",
+        home_dir.join(".nix-profile/lib").to_string_lossy()
+    );
     println!("cargo:rustc-link-lib=TKernel");
     println!("cargo:rustc-link-lib=TKMath");
     println!("cargo:rustc-link-lib=TKBRep");
@@ -12,10 +17,11 @@ fn main() {
     println!("cargo:rustc-link-lib=TKSTL");
     println!("cargo:rustc-link-lib=TKVRML");
     println!("cargo:rustc-link-lib=TKLCAF");
+    println!("cargo:rustc-link-lib=TKMesh");
 
     cxx_build::bridge("src/main.rs")
         .file("src/OCCTWrapper.cpp")
-        .include("/home/valentin/.nix-profile/include/opencascade")
+        .include(home_dir.join(".nix-profile/include/opencascade"))
         .include("src")
         .flag_if_supported("-std=c++14")
         .compile("occtwrapper");

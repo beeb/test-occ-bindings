@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use anyhow::{bail, Result};
 use ffi::convert_step_to_stl;
 
@@ -11,9 +13,12 @@ mod ffi {
 }
 
 fn main() -> Result<()> {
-    let step_file_path = "./data/test.STEP".to_string();
-    let stl_file_path = "./data/test.stl".to_string();
-    if !convert_step_to_stl(step_file_path, stl_file_path) {
+    let step_file_path = Path::new("./data/test.STEP").canonicalize().unwrap();
+    let stl_file_path = step_file_path.parent().unwrap().join("test.stl");
+    if !convert_step_to_stl(
+        step_file_path.to_string_lossy().into_owned(),
+        stl_file_path.to_string_lossy().into_owned(),
+    ) {
         bail!("Failed to convert STEP to STL");
     }
     Ok(())
