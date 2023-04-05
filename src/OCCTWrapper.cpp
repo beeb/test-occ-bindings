@@ -5,13 +5,13 @@
 #include "BRepMesh_IncrementalMesh.hxx"
 #include "StlAPI_Writer.hxx"
 
-const double STEP_TRANS_CHORD_ERROR = 0.005;
-const double STEP_TRANS_ANGLE_RES = 1;
+/* const double STEP_TRANS_CHORD_ERROR = 0.005;
+const double STEP_TRANS_ANGLE_RES = 1; */
 
 namespace MyTest
 {
 
-    bool convert_step_to_stl(rust::String step_file_path, rust::String stl_file_path)
+    bool convert_step_to_stl(rust::String step_file_path, rust::String stl_file_path, rust::f64 chord_error, rust::f64 angle_res)
     {
         STEPControl_Reader reader;
         TopoDS_Compound comp;
@@ -40,7 +40,7 @@ namespace MyTest
                 for (int i = 1; i <= nbs; i++)
                 {
                     TopoDS_Shape shape = reader.Shape(i);
-                    BRepMesh_IncrementalMesh mesher(shape, STEP_TRANS_CHORD_ERROR, false, STEP_TRANS_ANGLE_RES, true);
+                    BRepMesh_IncrementalMesh mesher(shape, chord_error, false, angle_res, true);
                     builder.Add(comp, shape);
                 }
             }
