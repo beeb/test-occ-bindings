@@ -31,14 +31,11 @@ fn main() {
     println!("cargo:rerun-if-changed=src/OCCTWrapper.cpp");
     println!("cargo:rerun-if-changed=src/OCCTWrapper.hpp");
 
-    let mut separator = ':';
     if cfg!(windows) {
-        separator = ';';
+        println!(
+            "cargo:rustc-env=PATH={};{}",
+            env::var("PATH").unwrap(),
+            Path::new("./dlls").to_string_lossy()
+        );
     }
-    println!(
-        "cargo:rustc-env=PATH={}{}{}",
-        env::var("PATH").unwrap(),
-        separator,
-        Path::new("./dlls").to_string_lossy()
-    );
 }
